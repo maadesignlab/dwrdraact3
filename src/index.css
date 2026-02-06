@@ -1,0 +1,182 @@
+/* =============================
+   1️⃣ Tailwind completo
+   ============================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import "tailwindcss";
+
+/* =============================
+   2️⃣ Tokens & variables
+   ============================= */
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Colores de marca RAW */
+  --color-broom-50: #fcffe7;
+  --color-broom-100: #f7ffc1;
+  --color-broom-200: #f4ff86;
+  --color-broom-300: #f6ff41;
+  --color-broom-400: #fffe0e;
+  --color-broom-500: #fdf001;
+  --color-broom-600: #d0b400;
+  --color-broom-700: #a68202;
+  --color-broom-800: #89650a;
+  --color-broom-900: #74520f;
+  --color-broom-950: #442c04;
+
+  --color-woodsmoke-50: #f6f6f6;
+  --color-woodsmoke-100: #e7e7e7;
+  --color-woodsmoke-200: #d1d1d1;
+  --color-woodsmoke-300: #b0b0b0;
+  --color-woodsmoke-400: #888888;
+  --color-woodsmoke-500: #6d6d6d;
+  --color-woodsmoke-600: #5d5d5d;
+  --color-woodsmoke-700: #4f4f4f;
+  --color-woodsmoke-800: #454545;
+  --color-woodsmoke-900: #3d3d3d;
+  --color-woodsmoke-950: #1a1a1a;
+
+  /* Tokens semánticos */
+  --bg-footer: var(--color-woodsmoke-950);
+  --color-bg-grainy: #fff9e6;
+  --color-bg: #f8f9fa;
+  --color-accent-bg: rgba(253, 240, 1, 0.15);
+  --glass-subtle: rgba(255,255,255,0.05);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 10px 40px rgba(0,0,0,0.1);
+
+  /* Layout */
+  --header-height: 68px;
+  --footer-height: 200px;
+
+  /* Gradients */
+  --bg-main-gradient: radial-gradient(
+    circle at 10% 10%,
+    var(--color-bg-grainy) 0%,
+    var(--color-bg) 50%
+  );
+
+  --bg-footer-yellowdot-gradient: radial-gradient(
+    circle at 50% -100px,
+    var(--color-accent-bg) 0%,
+    var(--glass-subtle) 50%,
+    transparent 80%
+  );
+}
+
+/* =============================
+   3️⃣ Base global
+   ============================= */
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    background-image: var(--bg-main-gradient);
+    color: #111827;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+  }
+}
+
+/* =============================
+   4️⃣ Componentes
+   ============================= */
+@layer components {
+
+  /* Header */
+  .header {
+    @apply flex justify-between items-center px-5 py-5 sticky top-0 backdrop-blur-md rounded-b-2xl;
+    height: var(--header-height);
+    background: var(--glass-bg);
+    border-bottom: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    z-index: 50;
+  }
+
+  /* Hero */
+  .hero {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* Footer */
+  .footer {
+    position: relative;
+    background-color: var(--bg-footer);
+    overflow: hidden;
+  }
+
+  .footer::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    height: 500px;
+    background: var(--bg-footer-yellowdot-gradient);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .footer-container,
+  .footer-bottom {
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-column {
+    @apply rounded-lg bg-gray-800 text-white p-5 border border-white/10;
+  }
+
+  /* Botón primario */
+  .btn-primary {
+    @apply bg-blue-500 text-white font-bold py-2 px-4 rounded transition-colors;
+  }
+
+  .btn-primary:hover {
+    @apply bg-blue-600;
+  }
+
+  /* Card */
+  .card {
+    @apply bg-white shadow-lg rounded-lg p-4;
+  }
+
+  /* Input */
+  .input {
+    @apply border border-gray-300 rounded px-3 py-2 w-full
+           focus:outline-none focus:ring-2 focus:ring-blue-500;
+  }
+}
+
+/* =============================
+   5️⃣ Utilidades
+   ============================= */
+@layer utilities {
+
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+  }
+
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .h-dvh-minusheaderfooter {
+    height: calc(100vh - var(--header-height) - var(--footer-height));
+  }
+
+  .h-dvh-minusheader {
+    height: calc(100vh - var(--header-height));
+  }
+}
