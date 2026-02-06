@@ -8,9 +8,17 @@ function Home() {
     return (
     <>
         <Header />
+
+        {/* Hero section */}
         <Hero />
+
+        {/* Services section */}
         <Services />
+
+        {/* Pricing section */}
         <Pricing />
+
+
         <Footer />
     </>
     );
