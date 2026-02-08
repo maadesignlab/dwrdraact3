@@ -31,25 +31,17 @@ export default {
         },
       },
 
-      /* =====================
-         🔤 TIPOGRAFÍA
-         ===================== */
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
       },
 
-      /* =====================
-         🌫️ SOMBRAS
-         ===================== */
       boxShadow: {
         soft: "0 4px 12px rgba(0,0,0,0.08)",
         card: "0 8px 24px rgba(0,0,0,0.12)",
         float: "0 12px 40px rgba(0,0,0,0.18)",
         inset: "inset 0 1px 2px rgba(0,0,0,0.1)",
       },
-      /* =====================
-         🧱 CAPAS
-         ===================== */
+
       zIndex: {
         header: "50",
         overlay: "90",
@@ -57,7 +49,7 @@ export default {
       },
 
       /* =====================
-         🎞️ ANIMACIONES
+         🎞️ ANIMACIONES (para texto dinámico)
          ===================== */
       keyframes: {
         fadeUp: {
@@ -67,7 +59,11 @@ export default {
         moveInLeft: {
           "0%": {
             opacity: "0",
-            transform: "translateX(-32px) scale(0.96)",
+            transform: "translateX(-30px) scale(0.8)",
+          },
+          "50%": {
+            opacity: "0",
+            transform: "translateX(-15px) scale(0.96)",
           },
           "100%": {
             opacity: "1",
@@ -82,14 +78,14 @@ export default {
       },
 
       /* =====================
-         ⏱️ TRANSITION DELAY
+         ⏱️ TRANSITION DELAYS (SCROLL STAGGER)
          ===================== */
       transitionDelay: {
         0: "0ms",
-        1: "120ms",
-        2: "240ms",
-        3: "360ms",
-        4: "480ms",
+        1: "180ms",
+        2: "360ms",
+        3: "540ms",
+        4: "720ms",
       },
     },
   },
@@ -98,17 +94,27 @@ export default {
      🔌 PLUGINS
      ===================== */
   plugins: [
-    function ({ addUtilities }) {
-      addUtilities({
-        ".stagger-0": { animationDelay: "0ms" },
-        ".stagger-1": { animationDelay: "250ms" },
-        ".stagger-2": { animationDelay: "500ms" },
-        ".stagger-3": { animationDelay: "750ms" },
-        ".stagger-4": { animationDelay: "1000ms" },
+    function ({ addUtilities, theme }) {
+      const delays = theme("transitionDelay");
+
+      const utilities = Object.entries(delays).map(([key, value]) => ({
+        [`.stagger-${key}`]: {
+          transitionDelay: value,
+        },
+      }));
+
+      addUtilities(utilities);
+
+      addUtilities ({
+        ".animdelay-0": { animationDelay: "0ms" },
+        ".animdelay-1": { animationDelay: "180ms" },
+        ".animdelay-2": { animationDelay: "360ms" },
+        ".animdelay-3": { animationDelay: "540ms" },
       });
     },
   ],
 };
+
 
 
 
