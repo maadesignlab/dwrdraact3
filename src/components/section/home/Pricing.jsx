@@ -92,11 +92,12 @@ function Pricing() {
         </h4>
 
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
           <li>
             <span className="text-sm text-slate-500">Libros / mes</span>
             <span
               key={`${activePlan}-books`}
-              className="block text-xl font-semibold animate-fade-up delay-1"
+              className="block text-xl font-semibold animate-move-in-left stagger-0"
             >
               {plans[activePlan].books}
             </span>
@@ -106,7 +107,7 @@ function Pricing() {
             <span className="text-sm text-slate-500">Calidad</span>
             <span
               key={`${activePlan}-quality`}
-              className="block text-xl font-semibold animate-fade-up delay-2"
+              className="block text-xl font-semibold animate-move-in-left stagger-1"
             >
               {plans[activePlan].quality}
             </span>
@@ -116,7 +117,7 @@ function Pricing() {
             <span className="text-sm text-slate-500">Formato</span>
             <span
               key={`${activePlan}-format`}
-              className="block text-xl font-semibold animate-fade-up delay-3"
+              className="block text-xl font-semibold animate-move-in-left stagger-2"
             >
               {plans[activePlan].format}
             </span>
@@ -126,12 +127,14 @@ function Pricing() {
             <span className="text-sm text-slate-500">Coworking</span>
             <span
               key={`${activePlan}-coworking`}
-              className="block text-xl font-semibold animate-fade-up delay-4"
+              className="block text-xl font-semibold animate-move-in-left stagger-3"
             >
               {plans[activePlan].coworking}
             </span>
           </li>
+
         </ul>
+
       </aside>
     </section>
   );
