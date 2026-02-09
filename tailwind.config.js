@@ -10,18 +10,33 @@ export default {
       colors: {
         brand: {
           primary: "#fdf001",
-          secondary: "#FFBABA",
+          50: "#fcffe7",
+          100: "#f7ffc1",
+          200: "#f4ff86",
+          300: "#f6ff41",
+          400: "#fffe0e",
+          500: "#fdf001",
+          600: "#d0b400",
+          700: "#a68202",
+          800: "#89650a",
+          900: "#74520f",
+          950: "#442c04",
         },
         bg: {
           surface: "#1a1a1a",
-          fill: "#333333",
+          fill: "#fdfdfd",
           surface_dark: "#0d0d0d",
           fill_dark: "#1a1a1a",
         },
         text: {
-          primary: "#ffffff",
+          primary: "#000000",
           secondary: "#cccccc",
           accent: "#fdf001",
+          white: "#ffffff",
+        },
+        border: {
+          default: "#444444",
+          light: "#bababa",
         },
         state: {
           success: "#4CAF50",
@@ -40,12 +55,25 @@ export default {
         card: "0 8px 24px rgba(0,0,0,0.12)",
         float: "0 12px 40px rgba(0,0,0,0.18)",
         inset: "inset 0 1px 2px rgba(0,0,0,0.1)",
+        updeep: "0 -8px 24px rgba(0,0,0,0.12)",
+        brand: "0 10px 15px -3px rgba(253, 240, 1, 0.2)",
       },
 
       zIndex: {
         header: "50",
         overlay: "90",
         modal: "100",
+      },
+
+      backgroundImage: {
+        // Este gradiente reemplaza la lógica compleja del CSS
+        'footer-glow': "radial-gradient(600px at 0% 0%, theme('colors.brand.500 / 15%') 0%, transparent 100%)",
+        
+        // Un gradiente suave para las tarjetas de la cafetería o el Hero
+        'glass-gradient': "linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))",
+        
+        // Gradiente de marca para botones o acentos
+        'brand-linear': "linear-gradient(to right, theme('colors.brand.400'), theme('colors.brand.600'))",
       },
 
       /* =====================
@@ -73,7 +101,7 @@ export default {
       },
 
       animation: {
-        "fade-up": "fadeUp 700ms ease-out both",
+        "fade-up": "fadeUp 500ms ease-out both",
         "move-in-left": "moveInLeft 500ms ease-out both",
       },
 
@@ -100,6 +128,7 @@ export default {
       const utilities = Object.entries(delays).map(([key, value]) => ({
         [`.stagger-${key}`]: {
           transitionDelay: value,
+          animationDelay: value,
         },
       }));
 

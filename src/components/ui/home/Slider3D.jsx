@@ -18,21 +18,25 @@ function Slider3D({ images = [] }) {
 
   return (
     <div
-      className="relative w-full h-[420px] md:h-[520px] lg:h-[600px]"
-      style={{ perspective: "1000px" }}
+      /* 1. Cambiamos h fija por aspect-ratio para que la altura dependa del ancho de la columna */
+      className="relative w-full aspect-[4/3] md:aspect-video max-w-2xl mx-auto"
+      style={{ perspective: "1200px" }}
     >
       <div className="absolute inset-0 flex items-center justify-center">
         {visibleSlides.map(({ index, position }) => {
+          
+          /* 2. Usamos % en translateX para que el desplazamiento sea proporcional a la columna */
           const transformMap = {
-            left: "translateX(-150px) rotateY(18deg) scale(0.92)",
+            left: "translateX(-35%) rotateY(25deg) scale(0.85)",
             center: "translateX(0) rotateY(0deg) scale(1)",
-            right: "translateX(150px) rotateY(-18deg) scale(0.92)",
+            right: "translateX(35%) rotateY(-25deg) scale(0.85)",
           };
 
+          /* 3. Ahora las slides ocupan un % del contenedor padre */
           const sizeMap = {
-            center: "w-[420px] h-[260px] md:w-[520px] md:h-[320px]",
-            left: "w-[360px] h-[220px] md:w-[440px] md:h-[260px]",
-            right: "w-[360px] h-[220px] md:w-[440px] md:h-[260px]",
+            center: "w-[75%] h-[85%] z-20",
+            left: "w-[65%] h-[70%] z-10",
+            right: "w-[65%] h-[70%] z-10",
           };
 
           const isActive = position === "center";
@@ -44,17 +48,16 @@ function Slider3D({ images = [] }) {
               className={`
                 absolute cursor-pointer
                 ${sizeMap[position]}
-                rounded-3xl overflow-hidden
+                rounded-2xl md:rounded-3xl overflow-hidden
                 will-change-transform
-                transition-transform duration-200 ease-out
-                ${isActive ? "ring-1 ring-white/30" : ""}
+                transition-all duration-500 ease-out
+                ${isActive ? "ring-1 ring-white/30" : "opacity-60 hover:opacity-100"}
               `}
               style={{
                 transform: transformMap[position],
-                zIndex: isActive ? 10 : 1,
                 boxShadow: isActive
-                  ? "0 0 0 1px rgba(255,255,255,.25), 0 20px 60px rgba(0,0,0,.35)"
-                  : "0 10px 30px rgba(0,0,0,.25)",
+                  ? "0 20px 50px rgba(0,0,0,0.3)"
+                  : "0 10px 20px rgba(0,0,0,0.2)",
               }}
             >
               <img

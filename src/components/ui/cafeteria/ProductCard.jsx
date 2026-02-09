@@ -37,7 +37,7 @@ function ProductCard({ product, onAddToCart }) {
   };
 
   return (
-    <article className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+    <article className="glass-card p-5">
       <img
         src={product.image}
         alt={product.name}

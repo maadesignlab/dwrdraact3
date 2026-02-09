@@ -7,8 +7,7 @@ function Pricing() {
   const summary = useScrollAnimation();
 
   const [activePlan, setActivePlan] = useState("basic");
-
-  const [orchestrate, setOrchestrate] = useState(false);
+  const [visibleIndex, setVisibleIndex] = useState(-1);
   const [played, setPlayed] = useState(false);
 
   const plans = {
@@ -44,88 +43,63 @@ function Pricing() {
     },
   };
 
-  // 🎼 Orquestación global (una sola vez)
+  /* 🎼 Aparición secuencial real */
   useEffect(() => {
-    if (
-      header.visible &&
-      cards.visible &&
-      summary.visible &&
-      !played
-    ) {
-      setOrchestrate(true);
-      setPlayed(true);
-    }
-  }, [header.visible, cards.visible, summary.visible, played]);
+    if (!cards.visible || played) return;
+
+    Object.keys(plans).forEach((_, i) => {
+      setTimeout(() => {
+        setVisibleIndex(i);
+      }, i * 120);
+    });
+
+    setPlayed(true);
+  }, [cards.visible, played, plans]);
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-16 space-y-16">
 
-      {/* ===== PHASE 1 — HEADER ===== */}
+      {/* ===== HEADER ===== */}
       <header
         ref={header.ref}
-        className={`
-          max-w-2xl space-y-3 transition-all duration-700 ease-out
-          ${
-            header.visible || orchestrate
-              ? "opacity-100 translate-y-0 delay-0"
-              : "opacity-0 translate-y-6"
-          }
+        className={`max-w-2xl space-y-3 transition-all duration-500 ease-out
+          ${header.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
         `}
       >
         <h2 className="text-3xl font-semibold animate-fade-up">
           Planes de Suscripción Nexus
         </h2>
-
-        <p className="text-slate-600 animate-fade-up delay-1">
+        <p className="text-slate-600 animate-fade-up stagger-1">
           Accede a la librería, coworking y contenidos digitales según tu plan.
         </p>
       </header>
 
-      {/* ===== PHASE 2 — CARDS (sincronizadas con summary) ===== */}
+      {/* ===== CARDS (UNA POR UNA) ===== */}
       <div
         ref={cards.ref}
-        className={`
-          grid grid-cols-1 md:grid-cols-3 -mb-1 transition-all duration-700 ease-out
-          ${
-            cards.visible || orchestrate
-              ? "opacity-100 translate-y-0 delay-2"
-              : "opacity-0 translate-y-6"
-          }
-        `}
+        className="grid grid-cols-1 md:grid-cols-3 -mb-3"
       >
         {Object.entries(plans).map(([key, plan], i) => (
           <article
             key={key}
             onClick={() => setActivePlan(key)}
             className={`
-              relative cursor-pointer rounded-t-2xl border-2 z-1 -ml-px -mr-px p-6 transition-all duration-700 ease-out stagger-${i}
-              ${
-                cards.visible || orchestrate
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-0 translate-y-6"
-              }
-              ${
-                activePlan === key
-                  ? "bg-brand-primary shadow-xl"
-                  : "bg-slate-100 hover:shadow-lg"
-              }
+              btn-tab
+              transition-all duration-400 ease-out
+              ${i <= visibleIndex
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-6 pointer-events-none"}
+              ${activePlan === key ? "is-active" : ""}
             `}
           >
             {/* PRICE BADGE */}
             <div
               className={`
-                absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-semibold
-                transition-all duration-500 ease-out stagger-${i}
-                ${
-                  cards.visible || orchestrate
-                    ? "opacity-100 scale-100"
-                    : "opacity-0 scale-90"
-                }
-                ${
-                  activePlan === key
-                    ? "bg-slate-900 text-white"
-                    : "bg-white text-slate-700"
-                }
+                price-badge transition-all duration-300
+                ${i <= visibleIndex ? "opacity-100 scale-100" : "opacity-0 scale-90"}
+                ${activePlan === key
+                  ? "bg-slate-900 text-white"
+                  : "bg-white text-slate-700"}
               `}
             >
               {plan.price}
@@ -140,17 +114,12 @@ function Pricing() {
         ))}
       </div>
 
-      {/* ===== PHASE 3 — SUMMARY (MISMO TIEMPO QUE CARDS) ===== */}
+      {/* ===== SUMMARY ===== */}
       <aside
         ref={summary.ref}
-        className={`
-          rounded-b-2xl border-t-2 z-10 bg-slate-200 p-8 space-y-6
-          transition-all duration-700 ease-out
-          ${
-            summary.visible || orchestrate
-              ? "opacity-100 translate-y-0 delay-2"
-              : "opacity-0 translate-y-6"
-          }
+        className={`rounded-b-2xl border border-border-light relative z-50 bg-slate-200 p-8 space-y-6 shadow-updeep
+          transition-all duration-500 ease-out
+          ${cards.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
         `}
       >
         <h4 className="text-lg font-semibold animate-fade-up">
@@ -162,7 +131,7 @@ function Pricing() {
             <span className="text-sm text-slate-500">Libros / mes</span>
             <span
               key={`books-${activePlan}`}
-              className="block text-xl font-semibold animate-move-in-left animdelay-0"
+              className="block text-xl font-semibold animate-move-in-left stagger-0"
             >
               {plans[activePlan].books}
             </span>
@@ -172,7 +141,7 @@ function Pricing() {
             <span className="text-sm text-slate-500">Calidad</span>
             <span
               key={`quality-${activePlan}`}
-              className="block text-xl font-semibold animate-move-in-left animdelay-1"
+              className="block text-xl font-semibold animate-move-in-left stagger-1"
             >
               {plans[activePlan].quality}
             </span>
@@ -182,7 +151,7 @@ function Pricing() {
             <span className="text-sm text-slate-500">Formato</span>
             <span
               key={`format-${activePlan}`}
-              className="block text-xl font-semibold animate-move-in-left animdelay-2"
+              className="block text-xl font-semibold animate-move-in-left stagger-2"
             >
               {plans[activePlan].format}
             </span>
@@ -192,7 +161,7 @@ function Pricing() {
             <span className="text-sm text-slate-500">Coworking</span>
             <span
               key={`coworking-${activePlan}`}
-              className="block text-xl font-semibold animate-move-in-left animdelay-3"
+              className="block text-xl font-semibold animate-move-in-left stagger-3"
             >
               {plans[activePlan].coworking}
             </span>
@@ -204,6 +173,10 @@ function Pricing() {
 }
 
 export default Pricing;
+
+
+
+
 
 
 
