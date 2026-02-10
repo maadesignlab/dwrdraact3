@@ -55,7 +55,7 @@ function Slider3D({ images = [], interval = 3500 }) {
               className={`
                 absolute cursor-pointer
                 ${sizeMap[position]}
-                rounded-2xl md:rounded-3xl overflow-hidden bg-amber-400
+                rounded-2xl md:rounded-3xl overflow-hidden
                 will-change-transform
                 transition-all duration-500 ease-out
                 ${isActive ? "ring-1 ring-white/30" : "opacity-60 hover:opacity-100"}
