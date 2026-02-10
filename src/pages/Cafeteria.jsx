@@ -107,8 +107,8 @@ function Cafeteria() {
                 onClick={() => setCategory(c.value)}
                 className={`rounded-full px-4 py-2 text-sm font-medium transition
                   ${category === c.value
-                    ? "bg-slate-900 text-white"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"}`}
+                    ? "bg-slate-900 text-white cursor-pointer"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer"}`}
               >
                 {c.label}
               </button>

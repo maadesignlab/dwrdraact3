@@ -66,13 +66,10 @@ export default {
       },
 
       backgroundImage: {
-        // Este gradiente reemplaza la lógica compleja del CSS
         'footer-glow': "radial-gradient(600px at 0% 0%, theme('colors.brand.500 / 15%') 0%, transparent 100%)",
         
-        // Un gradiente suave para las tarjetas de la cafetería o el Hero
         'glass-gradient': "linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))",
         
-        // Gradiente de marca para botones o acentos
         'brand-linear': "linear-gradient(to right, theme('colors.brand.400'), theme('colors.brand.600'))",
       },
 

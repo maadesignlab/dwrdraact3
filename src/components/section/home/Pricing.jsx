@@ -66,7 +66,7 @@ function Pricing() {
           ${header.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
         `}
       >
-        <h2 className="text-3xl font-semibold animate-fade-up">
+        <h2 className="title-h2">
           Planes de Suscripción Nexus
         </h2>
         <p className="text-slate-600 animate-fade-up stagger-1">
@@ -77,7 +77,7 @@ function Pricing() {
       {/* ===== CARDS (UNA POR UNA) ===== */}
       <div
         ref={cards.ref}
-        className="grid grid-cols-1 md:grid-cols-3 -mb-3"
+        className="grid grid-cols-1 gap-2 md:grid-cols-3 md:gap-0 mb-3 md:-mb-3"
       >
         {Object.entries(plans).map(([key, plan], i) => (
           <article
@@ -117,7 +117,7 @@ function Pricing() {
       {/* ===== SUMMARY ===== */}
       <aside
         ref={summary.ref}
-        className={`rounded-b-2xl border border-border-light relative z-50 bg-slate-200 p-8 space-y-6 shadow-updeep
+        className={`rounded-t-2xl rounded-b-2xl md:rounded-t-none border border-border-light relative z-30 bg-slate-200 p-8 space-y-6 shadow-updeep
           transition-all duration-500 ease-out
           ${cards.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}
         `}

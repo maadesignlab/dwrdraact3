@@ -73,6 +73,10 @@
    3️⃣ Base global
    ============================= */
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
   body {
     font-family: 'Inter', sans-serif;
     background-image: var(--bg-main-gradient);
@@ -82,7 +86,12 @@
   h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
   }
+  .title-h2 {
+    @apply text-3xl md:text-4xl font-semibold animate-fade-up;
+  }
 }
+
+
 
 /* =============================
    4️⃣ Componentes
@@ -135,9 +144,9 @@
 
   /* Botones */
   .btn-primary {
-    @apply bg-bg-surface_dark text-white font-bold py-2 px-4 rounded transition-colors;
+    @apply bg-bg-surface_dark text-white font-bold py-2 px-4 rounded-2xl transition-colors cursor-pointer;
     @variant hover {
-      @apply bg-brand-200 text-text-primary;
+      @apply bg-brand-200 text-text-primary border-border-light;
     }
     @variant focus {
       @apply bg-brand-300 text-white;
@@ -148,13 +157,24 @@
   }
 
   .btn-tab {
-    @apply relative bg-slate-100 p-6 cursor-pointer top-0 z-10 rounded-t-2xl border border-border-light;
+  @apply
+    relative
+    bg-slate-100
+    p-6
+    cursor-pointer
+    top-0
+    z-10
+    border
+    border-border-light
+    rounded-t-2xl;
 
-    }
+  /* sm: tarjeta completa */
+  @apply rounded-2xl;
 
-      html [class*='stagger-'] {
-    transition-delay: var(--tw-transition-delay) !important;
-  }
+  /* md+: vuelve a comportamiento tipo tab */
+  @apply md:rounded-t-2xl md:rounded-b-none;
+}
+
 
     /* Hover suave: solo si la tarjeta no está activa */
     .btn-tab:not(.is-active):hover {
@@ -163,8 +183,18 @@
 
     /* ESTADO ACTIVO: Respuesta instantánea */
     .btn-tab.is-active {
-      @apply bg-brand-500 shadow-xl -top-2 z-20;
+      @apply bg-brand-500 shadow-xl md:-top-2 z-20;
     }
+
+  .badge-filter {
+    @apply inline-block px-3 py-1 rounded-full text-sm font-medium bg-bg-fill_dark text-white cursor-pointer transition-colors;
+    @variant hover {
+      @apply bg-brand-200 text-text-primary;
+    }
+    @variant active {
+      @apply bg-brand-300 text-white;
+    }
+  }  
 
   .price-badge {
     @apply absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-semibold transition-all duration-200;

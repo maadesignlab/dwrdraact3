@@ -11,7 +11,10 @@ export function useScrollAnimation(options = {}) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          // 👇 fuerza un frame antes de activar animaciones
+          requestAnimationFrame(() => {
+            setVisible(true);
+          });
           observer.disconnect();
         }
       },

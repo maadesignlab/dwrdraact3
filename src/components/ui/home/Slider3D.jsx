@@ -1,7 +1,18 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 
-function Slider3D({ images = [] }) {
+function Slider3D({ images = [], interval = 3500 }) {
   const [active, setActive] = useState(0);
+
+  // AUTOPLAY
+  useEffect(() => {
+    if (images.length <= 1) return;
+
+    const timer = setInterval(() => {
+      setActive(prev => (prev + 1) % images.length);
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [images.length, interval]);
 
   const visibleSlides = useMemo(() => {
     const prev = (active - 1 + images.length) % images.length;
@@ -18,21 +29,17 @@ function Slider3D({ images = [] }) {
 
   return (
     <div
-      /* 1. Cambiamos h fija por aspect-ratio para que la altura dependa del ancho de la columna */
       className="relative w-full aspect-[4/3] md:aspect-video max-w-2xl mx-auto"
       style={{ perspective: "1200px" }}
     >
       <div className="absolute inset-0 flex items-center justify-center">
         {visibleSlides.map(({ index, position }) => {
-          
-          /* 2. Usamos % en translateX para que el desplazamiento sea proporcional a la columna */
           const transformMap = {
             left: "translateX(-35%) rotateY(25deg) scale(0.85)",
             center: "translateX(0) rotateY(0deg) scale(1)",
             right: "translateX(35%) rotateY(-25deg) scale(0.85)",
           };
 
-          /* 3. Ahora las slides ocupan un % del contenedor padre */
           const sizeMap = {
             center: "w-[75%] h-[85%] z-20",
             left: "w-[65%] h-[70%] z-10",
@@ -48,7 +55,7 @@ function Slider3D({ images = [] }) {
               className={`
                 absolute cursor-pointer
                 ${sizeMap[position]}
-                rounded-2xl md:rounded-3xl overflow-hidden
+                rounded-2xl md:rounded-3xl overflow-hidden bg-amber-400
                 will-change-transform
                 transition-all duration-500 ease-out
                 ${isActive ? "ring-1 ring-white/30" : "opacity-60 hover:opacity-100"}
