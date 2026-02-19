@@ -1,16 +1,23 @@
-import { useState } from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import AppRouter from './router/AppRouter'
-import './App.css'
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./router/AppRouter";
+import { AuthProvider } from "./context/AuthContext";
+import { CartProvider } from "./context/CartContext";
+import { StoreProvider } from "./context/StoreContext";
 
 function App() {
   return (
-    <>
+
+    <AuthProvider>  
       <BrowserRouter>
-        <AppRouter />
-      </BrowserRouter>  
-    </>
-  )
+        <StoreProvider>
+          <CartProvider>
+            <AppRouter />
+          </CartProvider>
+        </StoreProvider>
+      </BrowserRouter>
+    </AuthProvider>
+
+  );
 }
 
-export default App
+export default App;

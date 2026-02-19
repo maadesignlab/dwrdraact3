@@ -27,6 +27,8 @@ export default {
           fill: "#fdfdfd",
           surface_dark: "#0d0d0d",
           fill_dark: "#1a1a1a",
+          glass: "rgba(255, 255, 255, 0.8)",
+
         },
         text: {
           primary: "#000000",
@@ -57,6 +59,7 @@ export default {
         inset: "inset 0 1px 2px rgba(0,0,0,0.1)",
         updeep: "0 -8px 24px rgba(0,0,0,0.12)",
         brand: "0 10px 15px -3px rgba(253, 240, 1, 0.2)",
+        glass: "0 10px 40px rgba(0,0,0,0.1);",
       },
 
       zIndex: {

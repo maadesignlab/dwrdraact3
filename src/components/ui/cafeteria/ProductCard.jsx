@@ -95,7 +95,7 @@ function ProductCard({ product, onAddToCart }) {
       {/* Precio + botón */}
       <div className="mt-5 flex items-center justify-between">
         <span className="text-lg font-bold text-slate-900">
-          ${finalPrice.toFixed(2)}
+          ${finalPrice}
         </span>
 
         <button
