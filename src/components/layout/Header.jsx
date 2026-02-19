@@ -162,7 +162,7 @@ function Header() {
               </button>
 
               {openAccount && (
-                <div className="absolute right-0 mt-3 bg-surface border border-border-default rounded-xl shadow-xl p-4 w-40 z-50">
+                <div className="absolute right-0 mt-3 rounded-lg bg-slate-50 backdrop-blur-lg border border-border-light shadow-2xl p-4 z-50 w-40">
                   <Link
                     to="/account"
                     onClick={() => setOpenAccount(false)}
@@ -228,6 +228,7 @@ function Header() {
               <Link to="/cart" onClick={() => setOpenMobile(false)}>
                 Carrito ({totalItems})
               </Link>
+              <Link to="/account" onClick={() => setOpenMobile(false)}>Mi cuenta</Link>
               <button
                 onClick={handleLogout}
                 className="text-left text-red-500"
