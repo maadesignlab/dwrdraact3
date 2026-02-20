@@ -54,8 +54,9 @@ function BookCard({ libro }) {
         alt={libro.titulo}
         onClick={() => navigate(`/library/${libro.id}`)}
         className="
-          w-[80%]
-          h-[260px]
+          h-90
+          md:h-[260px]
+          aspect-[2/3]
           object-cover
           mx-auto
           mt-6 mb-4

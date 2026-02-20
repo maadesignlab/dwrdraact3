@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
 
@@ -121,7 +122,7 @@ export default {
   /* =====================
      🔌 PLUGINS
      ===================== */
-  plugins: [
+    plugins: [
     function ({ addUtilities, theme }) {
       const delays = theme("transitionDelay");
 
@@ -134,7 +135,7 @@ export default {
 
       addUtilities(utilities);
 
-      addUtilities ({
+      addUtilities({
         ".animdelay-0": { animationDelay: "0ms" },
         ".animdelay-1": { animationDelay: "180ms" },
         ".animdelay-2": { animationDelay: "360ms" },

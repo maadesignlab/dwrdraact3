@@ -47,7 +47,19 @@ function BookingFlow({ space, onClose, selectedHour }) {
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-xl text-text-secondary hover:text-text"
+          className="
+            btn-secondary
+            bg-transparent
+            border border-border-default/0
+            w-10 h-10
+            flex items-center justify-center
+            p-2
+            absolute top-4 right-4
+            text-2xl
+            hover:border-border-default
+            cursor-pointer
+            transition
+          "
         >
           ×
         </button>

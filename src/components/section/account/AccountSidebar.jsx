@@ -52,10 +52,14 @@ function AccountSidebar({ onTabChange, activeTab }) {
                 px-4 py-2.5
                 rounded-lg
                 text-sm font-medium
+                border
+                border-inset
+                border-border-light/50
                 transition-all
+                hover:cursor-pointer
                 ${
                   isActive
-                    ? "btn-secondary shadow-md border-0"
+                    ? "btn-secondary bg-brand-200 shadow-md font-semibold "
                     : "text-text-primary hover:bg-bg-fill hover:text-brand"
                 }
               `}
@@ -78,9 +82,10 @@ function AccountSidebar({ onTabChange, activeTab }) {
             w-full
             px-4 py-2.5
             rounded-lg
+            cursor-pointer
             text-sm font-medium
             text-red-500
-            hover:bg-red-50
+            hover:bg-red-100
             transition
           "
         >

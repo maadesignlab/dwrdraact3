@@ -41,7 +41,7 @@ function BookDetail() {
 
         <div className="
           w-full
-          grid grid-cols-1 md:grid-cols-[350px_1fr]
+          grid grid-cols-1 md:grid-cols-[300px_1fr]
           gap-10
           bg-surface
           p-8
@@ -104,6 +104,8 @@ function BookDetail() {
 
               <div className="
                 flex items-center
+                justify-center
+                w-fit
                 border-2 border-border-default
                 rounded-md
                 h-12
@@ -136,7 +138,6 @@ function BookDetail() {
                   font-semibold
                   rounded-md
                   transition-all
-                  hover:-translate-y-0.5
                   hover:shadow-lg
                 "
               >

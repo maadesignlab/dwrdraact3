@@ -2,6 +2,7 @@ import { useStore } from "../context/StoreContext";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import BookCard from "../components/ui/library/BookCard";
@@ -21,44 +22,6 @@ function Library() {
       return () => clearTimeout(timer);
     }
   }, [loading]);
-
-  /* =========================
-     Animaciones premium
-  ========================== */
-
-  const containerVariants = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.06
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-      scale: 0.98
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.35,
-        ease: "easeOut"
-      }
-    },
-    exit: {
-      opacity: 0,
-      y: -15,
-      scale: 0.98,
-      transition: {
-        duration: 0.2
-      }
-    }
-  };
 
   if (showLoader) {
     return (
@@ -82,7 +45,7 @@ function Library() {
         <div className="md:hidden p-6 pb-0">
           <button
             onClick={() => setOpenFilters(true)}
-            className="w-full border border-border-default rounded-lg py-2 font-medium"
+            className="btn-secondary w-full py-2"
           >
             Filtrar por
           </button>
@@ -92,19 +55,17 @@ function Library() {
 
           {/* SIDEBAR DESKTOP */}
           <aside className="
-            hidden md:block
+            hidden md:flex md:flex-col
             md:border-r md:border-border-default
-            p-6
             md:sticky md:top-[68px]
             md:h-[calc(100dvh-68px)]
+            p-6
           ">
             <LibraryFilters />
           </aside>
 
           {/* CATÁLOGO */}
           <section className="w-full relative">
-
-            {/* Loader overlay solo para filtros */}
             {loading && (
               <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-20">
                 <Loader />
@@ -113,9 +74,8 @@ function Library() {
 
             <motion.div
               layout
-              variants={containerVariants}
-              initial="hidden"
-              animate="show"
+              initial={{}}
+              animate={{}}
               className="
                 grid
                 gap-6
@@ -133,10 +93,10 @@ function Library() {
                     <motion.div
                       key={item.id}
                       layout
-                      variants={cardVariants}
-                      initial="hidden"
-                      animate="show"
-                      exit="exit"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
                     >
                       <BookCard libro={item} />
                     </motion.div>
@@ -150,37 +110,67 @@ function Library() {
                 )}
               </AnimatePresence>
             </motion.div>
-
           </section>
 
         </section>
       </main>
 
       {/* MOBILE FILTER DRAWER */}
-      {openFilters && (
-        <>
-          <div
-            className="fixed inset-0 bg-black/40 z-40 md:hidden"
-            onClick={() => setOpenFilters(false)}
-          />
+      <AnimatePresence>
+        {openFilters && (
+          <>
+            {/* OVERLAY */}
+            <motion.div
+              className="fixed inset-0 bg-black/40 z-40 md:hidden"
+              onClick={() => setOpenFilters(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            />
 
-          <aside className="
-            fixed top-0 right-0 h-full w-72
-            bg-white
-            z-50
-            p-6
-            shadow-2xl
-            md:hidden
-          ">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="font-semibold text-lg">Filtrar por</h3>
-              <button onClick={() => setOpenFilters(false)}>✕</button>
-            </div>
+            {/* DRAWER */}
+            <motion.aside
+              className="
+                fixed top-0 right-0 h-full w-72
+                bg-white
+                z-50
+                shadow-2xl
+                md:hidden
+                flex flex-col
+              "
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{
+                type: "spring",
+                stiffness: 260,
+                damping: 25
+              }}
+            >
+              {/* HEADER FIJO */}
+              <button className="
+                btn-secondary
+                bg-transparent
+                border border-border-default/0
+                w-10 h-10
+                flex items-center justify-center
+                p-2
+                absolute top-4 right-4
+                text-2xl
+                hover:border-border-default
+                cursor-pointer
+                transition
+              " onClick={() => setOpenFilters(false)}>x</button>
 
-            <LibraryFilters />
-          </aside>
-        </>
-      )}
+              {/* CONTENIDO SCROLLEABLE */}
+              <div className="flex-1 overflow-y-auto p-6">
+                <LibraryFilters />
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
 
       <Footer />
     </>

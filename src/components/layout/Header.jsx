@@ -98,7 +98,7 @@ function Header() {
                       {cart.map((item) => (
                         <div
                           key={item.bookId}
-                          className="grid grid-cols-[1fr_auto_auto] gap-3 items-center pb-3 mb-3 border-b border-border-default"
+                          className="grid grid-cols-[1fr_minmax(90px,auto)_minmax(90px,auto)] gap-3 items-center pb-3 mb-3 border-b border-border-default"
                         >
                           <div className="flex items-center gap-2 overflow-hidden">
                             <img
@@ -127,7 +127,7 @@ function Header() {
                             >+</button>
                           </div>
 
-                          <span className="text-sm font-medium">
+                          <span className="text-sm font-medium text-right">
                             ${(item.precio * item.cantidad).toLocaleString()}
                           </span>
                         </div>
@@ -142,7 +142,7 @@ function Header() {
                           setOpenCart(false);
                           navigate("/cart");
                         }}
-                        className="btn-primary w-full bg-brand text-white py-2 rounded-md hover:shadow-md transition"
+                        className="btn-primary w-full py-2 hover:shadow-md transition"
                       >
                         Ver carrito completo
                       </button>
@@ -188,7 +188,7 @@ function Header() {
       {/* HAMBURGER BUTTON */}
       <button
         onClick={() => setOpenMobile(!openMobile)}
-        className="md:hidden flex flex-col gap-1.5"
+        className="md:hidden flex flex-col gap-1.5 hover:cursor-pointer"
         aria-label="Abrir menú"
       >
         <span
@@ -211,8 +211,8 @@ function Header() {
 
     {/* MOBILE MENU (dropdown como el primero) */}
     {openMobile && (
-      <nav className="md:hidden absolute left-0 top-full w-full border-t border-slate-200 bg-white/90 backdrop-blur-md shadow-lg">
-        <div className="px-6 py-6 flex flex-col gap-4 text-sm font-medium text-slate-700">
+      <nav className="md:hidden absolute left-0 top-full w-full border-t border-slate-200 bg-white backdrop-blur-md shadow-lg">
+        <div className="px-6 py-6 flex flex-col gap-4 text-sm font-medium text-slate-700 hover:underline">
           {!user && (
             <Link to="/login" onClick={() => setOpenMobile(false)}>
               Login

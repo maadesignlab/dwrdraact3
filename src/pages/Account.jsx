@@ -44,11 +44,11 @@ function Account() {
                   {userProfile.nombre}
                 </h1>
 
-                <span className="inline-block mt-2 px-4 py-1 rounded-full text-xs font-semibold bg-brand-muted text-brand">
+                <span className="bg-brand-500 inline-block mt-2 px-4 py-1 rounded-full text-xs font-semibold bg-brand-muted text-brand">
                   {userProfile.rol}
                 </span>
 
-                <p className="mt-2 text-text-secondary">
+                <p className="mt-2 text-text-primary">
                   {userProfile.email}
                 </p>
               </div>
@@ -57,8 +57,8 @@ function Account() {
             {/* RESUMEN */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-              <div className="bg-bg-fill border border-border-default rounded-xl p-6">
-                <h4 className="text-xs uppercase text-text-secondary mb-2">
+              <div className="bg-bg-fill border border-border-light rounded-xl p-6">
+                <h4 className="text-xs uppercase text-text-primary/50 mb-2">
                   Libro en préstamo
                 </h4>
                 <p className="font-semibold text-text-primary">
@@ -68,8 +68,8 @@ function Account() {
                 </p>
               </div>
 
-              <div className="bg-bg-fill border border-border-default rounded-xl p-6">
-                <h4 className="text-xs uppercase text-text-secondary mb-2">
+              <div className="bg-bg-fill border border-border-light rounded-xl p-6">
+                <h4 className="text-xs uppercase text-text-primary/50 mb-2">
                   Próximo coworking
                 </h4>
                 <p className="font-semibold text-text-primary">

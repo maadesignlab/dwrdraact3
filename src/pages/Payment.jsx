@@ -26,7 +26,7 @@ function Payment() {
         bg-brand-100
         border-t border-border-default
         shadow-sm
-        z-50
+        z-10
       ">
         <div className="
           max-w-4xl
