@@ -14,19 +14,14 @@ function HistoryItem({ compra }) {
     <article
       className="
         flex gap-5
-        bg-surface
-        border border-border-default
-        rounded-3xl
+        glass-card
         p-4
         relative overflow-hidden
-        transition-all duration-300
-        hover:-translate-y-1
-        hover:shadow-md
-        hover:border-accent
+        transition
       "
     >
       {/* Imagen */}
-      <div className="w-[100px] h-[140px] rounded-2xl overflow-hidden shrink-0">
+      <div className="w-[60px] h-[100px] md:w-[100px] md:h-[140px] rounded-md overflow-hidden shrink-0">
         <img
           src={compra.imagen}
           alt={compra.titulo}
@@ -37,7 +32,7 @@ function HistoryItem({ compra }) {
 
       <div className="flex-1 flex flex-col justify-center">
         {/* Header */}
-        <div className="flex justify-between items-center mb-2">
+        <div className="flex flex-wrap justify-between items-center mb-2">
           <span
             className="
               text-[0.65rem]
@@ -47,12 +42,14 @@ function HistoryItem({ compra }) {
               rounded-full
               font-bold
               uppercase
+              mb-3
+              md:mb-0
             "
           >
             Completado
           </span>
 
-          <span className="text-sm text-text-secondary">
+          <span className="text-sm text-text-primary">
             {fechaFormateada}
           </span>
         </div>
@@ -62,15 +59,15 @@ function HistoryItem({ compra }) {
           <h3 className="text-lg font-bold text-text mb-1">
             {compra.titulo}
           </h3>
-          <p className="text-sm text-text-secondary">
+          <p className="text-sm text-brand-700">
             Orden #{compra.purchaseId}
           </p>
         </div>
 
         {/* Footer */}
-        <div className="flex justify-between items-end">
+        <div className="flex flex-wrap justify-between items-end">
           <div>
-            <span className="block text-xs text-text-secondary">
+            <span className="block text-xs text-text-primary">
               Precio total
             </span>
             <span className="text-xl font-extrabold text-primary">
@@ -83,12 +80,11 @@ function HistoryItem({ compra }) {
               console.log("Ver detalle de:", compra.purchaseId)
             }
             className="
-              bg-border-default
-              px-4 py-2
-              rounded-xl
-              text-sm font-semibold
-              transition
-              hover:bg-accent
+             btn-primary
+             text-sm
+             mt-4
+             lg:mt-0
+             
             "
           >
             Ver detalles

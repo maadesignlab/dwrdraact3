@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 import Login from "../pages/Login";
 import Home from "../pages/Home";
@@ -14,15 +15,34 @@ import Cafeteria from "../pages/Cafeteria";
 import PrivateRoute from "./PrivateRoute";
 
 function AppRouter() {
+  const { user } = useAuth();
+
   return (
     <Routes>
 
-      {/* Públicas */}
-      <Route path="/" element={<Navigate to="/home" replace />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/login" element={<Login />} />
+      {/* 🔁 Redirección inteligente */}
+      <Route
+        path="/"
+        element={
+          user
+            ? <Navigate to="/dashboard" replace />
+            : <Navigate to="/home" replace />
+        }
+      />
 
-      {/* Privadas */}
+      {/* 🌐 Públicas */}
+      <Route path="/home" element={<Home />} />
+
+      <Route
+        path="/login"
+        element={
+          user
+            ? <Navigate to="/dashboard" replace />
+            : <Login />
+        }
+      />
+
+      {/* 🔐 Privadas */}
       <Route
         path="/dashboard"
         element={
@@ -104,8 +124,15 @@ function AppRouter() {
         }
       />
 
-      {/* 🔁 Fallback */}
-      <Route path="*" element={<Navigate to="/home" replace />} />
+      {/* 🚨 Fallback */}
+      <Route
+        path="*"
+        element={
+          user
+            ? <Navigate to="/dashboard" replace />
+            : <Navigate to="/home" replace />
+        }
+      />
 
     </Routes>
   );
